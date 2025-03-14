@@ -6,14 +6,14 @@ import { CurvedImageGallery } from "@/components/auth/CurvedImageGallery";
 import Image from "next/image";
 import { Toaster, toast } from "sonner";
 import { CheckCircle } from "lucide-react";
-import { LoginForm } from "@/components/auth/LoginForm";
+import { RegisterForm } from "@/components/auth/RegisterForm";
 import { FarmingScaleSelection } from "@/components/auth/FarmingScaleSelection";
 import { FeatureHighlights } from "@/components/auth/FeatureHighlights";
 import { BackgroundGrid } from "@/components/ui/BackgroundGrid";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [isClient, setIsClient] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
   const [selectedScale, setSelectedScale] = useState("");
 
   // Set isClient to true after component mounts
@@ -21,14 +21,14 @@ export default function LoginPage() {
     setIsClient(true);
   }, []);
 
-  const handleLogin = () => {
+  const handleRegister = () => {
     // Success toast with sonner
-    toast.success('Login Successful!', {
-      description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
+    toast.success('Registration Successful!', {
+      description: 'Welcome to FarmQuest. Please select your preferred scale of farming.',
       position: 'bottom-center',
       duration: 4000,
     });
-    setIsLoggedIn(true);
+    setIsRegistered(true);
   };
 
   const handleScaleSelection = (scale: string) => {
@@ -88,10 +88,10 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Right section - conditionally show login form or farming scale selection */}
+        {/* Right section - conditionally show register form or farming scale selection */}
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 bg-white min-h-screen md:min-h-0">
           <div className="w-full max-w-md px-4 py-8 md:p-8 relative">
-            {!isLoggedIn ? (
+            {!isRegistered ? (
               <>
                 <div className="text-center mb-10">
                   {/* Logo for mobile - centered at top */}
@@ -107,21 +107,21 @@ export default function LoginPage() {
                   </div>
                   
                   <h1 className="text-2xl md:text-3xl font-semibold">
-                    Welcome Back
+                    Join <span className="text-[#77AD3F]">Farm</span><span className="text-[#0F6435]">Quest</span>
                     <br />
-                    To <span className="text-[#77AD3F]">Farm</span><span className="text-[#0F6435]">Quest</span>
+                    Today
                   </h1>
                 </div>
 
-                <LoginForm onLoginSuccess={handleLogin} />
+                <RegisterForm onRegisterSuccess={handleRegister} />
 
                 <div className="mt-8 text-center">
                   <p className="text-gray-500 text-sm">
-                    New to FarmQuest? <Link href="/register" className="text-[#0F6435] font-medium hover:underline">Sign up</Link>
+                    Already have an account? <Link href="/login" className="text-[#0F6435] font-medium hover:underline">Login</Link>
                   </p>
                 </div>
                 
-                {/* Only show the curved gallery on mobile when not logged in */}
+                {/* Only show the curved gallery on mobile when not registered */}
                 <div className="md:hidden mt-16 mb-8">
                   <CurvedImageGallery />
                 </div>
