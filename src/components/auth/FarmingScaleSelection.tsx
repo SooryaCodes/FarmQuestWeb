@@ -13,7 +13,7 @@ export const FarmingScaleSelection = ({
     <div className="w-full">
       <div className="text-center mb-6">
         <h1 className="text-2xl font-semibold">
-          What's your preferred scale of farming?
+          What&apos;s your preferred scale of farming?
         </h1>
         <p className="text-gray-500 mt-2">
           Please let us know your preferred scale of farming.
