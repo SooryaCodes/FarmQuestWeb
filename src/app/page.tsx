@@ -20,8 +20,8 @@ export default function Home() {
             <HeroImage />
           </div>
           
-          <div className="flex flex-col items-center text-center px-4">
-            <h2 className="text-4xl font-bold mb-3 text-gray-900">Planting Green, Growing Life</h2>
+          <div className="flex flex-col items-start text-left px-4">
+            <h2 className="text-4xl font-semibold mb-3 text-gray-900">Planting Green, Growing Life</h2>
             <p className="text-base text-gray-600 mb-10">
               Your Vision, Framed With Purpose, Has The Power To Transform The World.
             </p>
@@ -94,7 +94,7 @@ export default function Home() {
             {/* Right Content Section - Professional imagery and stats */}
             <div className="col-span-6 relative">
               <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl">
-                <div className="grid grid-cols-2 gap-6">
+                {/* <div className="grid grid-cols-2 gap-6">
                   <div className="aspect-square rounded-xl overflow-hidden">
                     <Image 
                       src="/images/farm-1.jpg" 
@@ -131,7 +131,8 @@ export default function Home() {
                       className="object-cover w-full h-full"
                     />
                   </div>
-                </div>
+                </div> */}
+                <HeroImage />
               </div>
               
               {/* Floating stats cards */}
