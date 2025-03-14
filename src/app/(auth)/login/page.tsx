@@ -15,6 +15,8 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedScale, setSelectedScale] = useState("");
 
   // Generate random grid items once on component mount
   const [gridItems] = useState(() => {
@@ -50,11 +52,12 @@ export default function LoginPage() {
       setTimeout(() => {
         // Success toast with sonner
         toast.success('Login Successful!', {
-          description: 'Welcome back to FarmQuest. Redirecting to your dashboard...',
+          description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
           position: 'bottom-center',
           duration: 4000,
         });
         setIsSubmitting(false);
+        setIsLoggedIn(true);
         // Handle actual login logic here
       }, 1500);
     } else {
@@ -66,6 +69,47 @@ export default function LoginPage() {
       });
     }
   };
+
+  const handleScaleSelection = (scale: string) => {
+    setSelectedScale(scale);
+    // Send selection to backend
+    console.log("Selected farming scale:", scale);
+    toast.success('Preference Saved!', {
+      description: `Your preferred farming scale "${scale}" has been saved.`,
+      position: 'bottom-center',
+      duration: 3000,
+    });
+    // Here you would typically make an API call to save the preference
+  };
+
+  // Farming scale selection UI component
+  const FarmingScaleSelection = () => (
+    <div className="w-full max-w-md rounded-3xl p-6 md:p-8 relative border border-gray-100">
+      <div className="text-center mb-6">
+        <h1 className="text-xl md:text-2xl font-semibold">
+          What's your preferred scale of farming?
+        </h1>
+        <p className="text-gray-500 mt-2 text-sm md:text-base">
+          Please let us know your preferred scale of framing.
+        </p>
+      </div>
+
+      <div className="space-y-3 md:space-y-4 mt-4 md:mt-6">
+        {["Never Leave Home", "Backyard Boys", "Tiny Farmer", "The Real Deal!"].map((scale) => (
+          <button
+            key={scale}
+            onClick={() => handleScaleSelection(scale)}
+            className={`w-full p-3 md:p-4 text-left rounded-lg border border-gray-200 flex justify-between items-center hover:border-[#77AD3F] transition-all ${
+              selectedScale === scale ? "border-[#77AD3F] bg-[#77AD3F]/5" : ""
+            }`}
+          >
+            <span className="text-sm md:text-base">{scale}</span>
+            <span className="text-gray-400">›</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -178,63 +222,139 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Right section with login form - improved styling */}
-        <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 bg-gray-50">
-          <div className="w-full max-w-md  rounded-3xl p-8 relative  border border-gray-100">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-semibold">
-                Welcome Back
-                <br />
-                To <span className="text-[#77AD3F]">Farm</span><span className="text-[#0F6435]">Quest</span>
-              </h1>
-            </div>
+        {/* Right section - conditionally show login form or farming scale selection */}
+        <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 bg-white min-h-screen md:min-h-0">
+          <div className="w-full max-w-md px-4 py-8 md:p-8 relative">
+            {!isLoggedIn ? (
+              <>
+                <div className="text-center mb-10">
+                  {/* Logo for mobile - centered at top */}
+                  <div className="md:hidden flex justify-center mb-8">
+                    <div className="relative w-[60px] h-[60px]">
+                      <Image 
+                        src="/images/Farm-quest-logo.svg" 
+                        alt="FarmQuest Logo" 
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                  
+                  <h1 className="text-2xl md:text-3xl font-semibold">
+                    Welcome Back
+                    <br />
+                    To <span className="text-[#77AD3F]">Farm</span><span className="text-[#0F6435]">Quest</span>
+                  </h1>
+                </div>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <AuthInput
-                label="Email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="youremail@example.com"
-                error={email && !/\S+@\S+\.\S+/.test(email) ? "Please enter a valid email address" : ""}
-              />
-              
-              <AuthInput
-                label="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                showPassword={showPassword}
-                toggleShowPassword={() => setShowPassword(!showPassword)}
-                error={password && password.length < 6 ? "Password must be at least 6 characters" : ""}
-              />
-             
-              <div className="text-right">
-                <Link href="/forgot-password" className="text-gray-400 text-sm hover:text-[#0F6435] transition-colors">
-                  forgot password?
-                </Link>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="youremail@example.com"
+                      className="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#77AD3F] focus:border-transparent"
+                    />
+                    {email && !/\S+@\S+\.\S+/.test(email) && (
+                      <p className="mt-1 text-sm text-red-600">Please enter a valid email address</p>
+                    )}
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        className="w-full px-4 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#77AD3F] focus:border-transparent pr-10"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                      >
+                        {showPassword ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                          </svg>
+                        ) : (
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                          </svg>
+                        )}
+                      </button>
+                    </div>
+                    {password && password.length < 6 && (
+                      <p className="mt-1 text-sm text-red-600">Password must be at least 6 characters</p>
+                    )}
+                  </div>
+                 
+                  <div className="text-right">
+                    <Link href="/forgot-password" className="text-gray-400 text-sm hover:text-[#0F6435] transition-colors">
+                      forgot password?
+                    </Link>
+                  </div>
+
+                  <div className="pt-3">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting || !email || !/\S+@\S+\.\S+/.test(email) || !password || password.length < 6}
+                      className="w-full py-3 px-4 bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white font-medium rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#77AD3F] disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? "Logging in..." : "Login"}
+                    </button>
+                  </div>
+                </form>
+
+                <div className="mt-8 text-center">
+                  <p className="text-gray-500 text-sm">
+                    New to FarmQuest? <Link href="/signup" className="text-[#0F6435] font-medium hover:underline">Sign up</Link>
+                  </p>
+                </div>
+                
+                {/* Only show the curved gallery on mobile when not logged in - moved here */}
+                <div className="md:hidden mt-16 mb-8">
+                  <CurvedImageGallery />
+                </div>
+              </>
+            ) : (
+              <div className="w-full">
+                <div className="text-center mb-6">
+                  <h1 className="text-2xl font-semibold">
+                    What's your preferred scale of farming?
+                  </h1>
+                  <p className="text-gray-500 mt-2">
+                    Please let us know your preferred scale of framing.
+                  </p>
+                </div>
+
+                <div className="space-y-3 mt-8">
+                  {["Never Leave Home", "Backyard Boys", "Tiny Farmer", "The Real Deal!"].map((scale) => (
+                    <button
+                      key={scale}
+                      onClick={() => handleScaleSelection(scale)}
+                      className={`w-full p-4 text-left rounded-lg border border-gray-200 flex justify-between items-center hover:border-[#77AD3F] transition-all ${
+                        selectedScale === scale ? "border-[#77AD3F] bg-[#77AD3F]/5" : ""
+                      }`}
+                    >
+                      <span>{scale}</span>
+                      <span className="text-gray-400">›</span>
+                    </button>
+                  ))}
+                </div>
               </div>
-
-              <div className="pt-3">
-                <AuthButton 
-                  type="submit" 
-                  text={isSubmitting ? "Logging in..." : "Login"} 
-                  disabled={isSubmitting || !email || !/\S+@\S+\.\S+/.test(email) || !password || password.length < 6} 
-                />
-              </div>
-            </form>
-
-            <div className="mt-8 text-center">
-              <p className="text-gray-500 text-sm">
-                New to FarmQuest? <Link href="/signup" className="text-[#0F6435] font-medium hover:underline">Sign up</Link>
-              </p>
-            </div>
-
-            {/* Only show the curved gallery on mobile */}
-            <div className="md:hidden">
-              <CurvedImageGallery />
-            </div>
+            )}
           </div>
         </div>
       </div>
