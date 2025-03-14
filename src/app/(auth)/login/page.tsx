@@ -7,7 +7,7 @@ import { AuthButton } from "@/components/auth/AuthButton";
 import { CurvedImageGallery } from "@/components/auth/CurvedImageGallery";
 import Image from "next/image";
 import { Toaster, toast } from "sonner";
-import { CheckCircle, AlertCircle, Leaf, BarChart2, Shield, Clock } from "lucide-react";
+import { CheckCircle, Leaf, BarChart2, Shield, Clock } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import HeroImage from '@/components/HeroImage';
