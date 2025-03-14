@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { AuthInput } from "./AuthInput";
 import { AuthButton } from "./AuthButton";
 import { toast } from "sonner";
