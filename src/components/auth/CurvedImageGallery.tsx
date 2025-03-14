@@ -13,7 +13,7 @@ const images = [
 
 const rotations = ["-10deg", "-5deg", "0deg", "5deg", "10deg"];
 
-const CurvedImageGallery = () => {
+export const CurvedImageGallery = () => {
   return (
     <div className="flex justify-center items-center my-10">
       <div className="flex gap-4">
@@ -38,4 +38,3 @@ const CurvedImageGallery = () => {
   );
 };
 
-export default CurvedImageGallery;

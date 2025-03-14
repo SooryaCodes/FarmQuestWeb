@@ -10,6 +10,7 @@ interface AuthInputProps {
   icon?: React.ReactNode;
   showPassword?: boolean;
   toggleShowPassword?: () => void;
+  error?: string;
 }
 
 export const AuthInput = ({
@@ -21,6 +22,7 @@ export const AuthInput = ({
   icon,
   showPassword,
   toggleShowPassword,
+  error,
 }: AuthInputProps) => {
   return (
     <div className="mb-2">
@@ -31,7 +33,7 @@ export const AuthInput = ({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-medium text-sm"
+          className={`w-full px-4 py-3 rounded-full border ${error ? 'border-red-400 focus:ring-red-400' : 'border-gray-200 focus:ring-primary-medium'} focus:outline-none focus:ring-1 text-sm`}
         />
         {type === "password" && toggleShowPassword && (
           <button
@@ -48,6 +50,7 @@ export const AuthInput = ({
           </div>
         )}
       </div>
+      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
     </div>
   );
 }; 
