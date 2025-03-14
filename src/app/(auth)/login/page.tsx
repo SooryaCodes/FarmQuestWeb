@@ -137,7 +137,7 @@ export default function LoginPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Yield Analytics</h3>
-                    <p className="text-sm text-white/90 leading-relaxed">Data-driven insights to maximize your farm's productivity</p>
+                    <p className="text-sm text-white/90 leading-relaxed">Data-driven insights to maximize your farm&apos;s productivity</p>
                   </div>
                 </div>
                 
@@ -147,7 +147,7 @@ export default function LoginPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Secure Platform</h3>
-                    <p className="text-sm text-white/90 leading-relaxed">Enterprise-grade security for your farm's valuable data</p>
+                    <p className="text-sm text-white/90 leading-relaxed">Enterprise-grade security for your farm&apos;s valuable data</p>
                   </div>
                 </div>
                 
