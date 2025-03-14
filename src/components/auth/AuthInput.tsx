@@ -1,0 +1,53 @@
+import React from "react";
+import { Eye, EyeOff } from "lucide-react";
+
+interface AuthInputProps {
+  label: string;
+  type: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  icon?: React.ReactNode;
+  showPassword?: boolean;
+  toggleShowPassword?: () => void;
+}
+
+export const AuthInput = ({
+  label,
+  type,
+  value,
+  onChange,
+  placeholder,
+  icon,
+  showPassword,
+  toggleShowPassword,
+}: AuthInputProps) => {
+  return (
+    <div className="mb-2">
+      <label className="block text-gray-600 mb-1 text-sm">{label}</label>
+      <div className="relative">
+        <input
+          type={type === "password" && showPassword ? "text" : type}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder}
+          className="w-full px-4 py-3 rounded-full border border-gray-200 focus:outline-none focus:ring-1 focus:ring-primary-medium text-sm"
+        />
+        {type === "password" && toggleShowPassword && (
+          <button
+            type="button"
+            onClick={toggleShowPassword}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        )}
+        {icon && (
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+            {icon}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}; 
