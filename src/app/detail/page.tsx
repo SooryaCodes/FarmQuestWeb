@@ -1,16 +1,27 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ArrowLeft, Heart, Sun, Droplets } from "lucide-react";
 import Link from "next/link";
+import { BackgroundGrid } from "@/components/ui/BackgroundGrid";
 
 export default function PlantDetailPage() {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-white md:bg-gray-100 md:py-10">
-      <div className="w-full max-w-md md:max-w-4xl bg-white md:rounded-xl md:shadow-xl overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white md:bg-transparent md:py-10 relative">
+      {/* Background Grid - only visible on desktop */}
+      <div className="hidden md:block absolute inset-0">
+        <BackgroundGrid isClient={isClient} />
+      </div>
+      
+      <div className="w-full max-w-md md:max-w-4xl bg-white md:rounded-xl md:shadow-xl overflow-hidden relative z-10">
         {/* Mobile layout (default) and Desktop layout with md: breakpoint */}
         <div className="relative md:hidden">
           {/* Mobile Layout */}
@@ -48,7 +59,7 @@ export default function PlantDetailPage() {
               <div className="flex justify-between items-center mb-2">
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Tomato</h2>
                 <div className="flex items-center">
-                  <span className="text-teal-500 text-base sm:text-lg">★ 4.8</span>
+                  <span className="text-[#77AD3F] text-base sm:text-lg">★ 4.8</span>
                   <span className="text-gray-500 text-xs sm:text-sm ml-1">(200 Reviews)</span>
                 </div>
               </div>
@@ -57,7 +68,7 @@ export default function PlantDetailPage() {
                 The banana tree (Musa spp.) is a fast-growing, herbaceous 
                 plant belonging to the Musaceae family. Despite its tree-
                 like appearance...
-                <span className="text-teal-500 ml-1">Read more</span>
+                <span className="text-[#0F6435] ml-1">Read more</span>
               </p>
 
               {/* Basic Needs */}
@@ -65,7 +76,7 @@ export default function PlantDetailPage() {
                 <h3 className="text-gray-700 text-sm sm:text-base font-medium mb-2 sm:mb-3">Basic Needs</h3>
                 <div className="flex gap-2 sm:gap-3">
                   <div className="flex items-center bg-gray-100 rounded-lg p-2 sm:p-3 flex-1">
-                    <div className="bg-teal-500 p-1.5 sm:p-2 rounded-md mr-2">
+                    <div className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] p-1.5 sm:p-2 rounded-md mr-2">
                       <Droplets className="text-white" size={16} />
                     </div>
                     <div>
@@ -91,7 +102,7 @@ export default function PlantDetailPage() {
                   <p className="text-gray-600 text-xs sm:text-sm">Price</p>
                   <p className="text-xl sm:text-2xl font-bold">$123.99</p>
                 </div>
-                <button className="bg-teal-500 text-white py-2 sm:py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base font-medium hover:bg-teal-600 transition-colors">
+                <button className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-2 sm:py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base font-medium hover:shadow-md active:scale-[0.99] transition-all">
                   Start Farming
                 </button>
               </div>
@@ -138,7 +149,7 @@ export default function PlantDetailPage() {
             </div>
             
             <div className="flex items-center mb-4">
-              <span className="text-teal-500 text-xl font-medium">★ 4.8</span>
+              <span className="text-[#77AD3F] text-xl font-medium">★ 4.8</span>
               <span className="text-gray-500 text-sm ml-2">(200 Reviews)</span>
             </div>
             
@@ -148,13 +159,13 @@ export default function PlantDetailPage() {
                 plant belonging to the Musaceae family. Despite its tree-
                 like appearance...
               </p>
-              <button className="text-teal-600 font-medium mt-2 hover:text-teal-700">Read more</button>
+              <button className="text-[#0F6435] font-medium mt-2 hover:text-[#77AD3F]">Read more</button>
             </div>
             
             <h3 className="text-gray-800 font-semibold text-lg mb-4">Basic Needs</h3>
             <div className="grid grid-cols-2 gap-4 mb-8">
               <div className="flex items-center bg-gray-50 rounded-lg p-4 border border-gray-100">
-                <div className="bg-teal-500 p-3 rounded-md mr-3">
+                <div className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] p-3 rounded-md mr-3">
                   <Droplets className="text-white" size={24} />
                 </div>
                 <div>
@@ -179,7 +190,7 @@ export default function PlantDetailPage() {
                   <p className="text-gray-600 text-sm">Price</p>
                   <p className="text-3xl font-bold text-gray-800">$123.99</p>
                 </div>
-                <button className="bg-teal-600 text-white py-3 px-8 rounded-lg font-medium hover:bg-teal-700 transition-colors">
+                <button className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-3 px-8 rounded-lg font-medium hover:shadow-md active:scale-[0.99] transition-all">
                   Start Farming
                 </button>
               </div>
