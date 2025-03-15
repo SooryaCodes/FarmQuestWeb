@@ -11,6 +11,7 @@ import { FarmingScaleSelection } from "@/components/auth/FarmingScaleSelection";
 import { FeatureHighlights } from "@/components/auth/FeatureHighlights";
 import { BackgroundGrid } from "@/components/ui/BackgroundGrid";
 import { useRouter } from "next/navigation";
+import axios from "@/lib/axios";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -18,20 +19,31 @@ export default function LoginPage() {
   const [isClient, setIsClient] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedScale, setSelectedScale] = useState("");
+  const [user, setUser] = useState(null);
 
   // Set isClient to true after component mounts
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const handleLogin = () => {
-    // Success toast with sonner
-    toast.success('Login Successful!', {
-      description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
-      position: 'bottom-center',
-      duration: 4000,
-    });
-    setIsLoggedIn(true);
+  const handleLogin = async (email: string, password: string) => {
+    try {
+      const response = await axios.post('/auth/login', { email, password });
+      setUser(response.data);
+      console.log(response.data);
+      console.log(user);
+      setIsLoggedIn(true);
+      toast.success('Login Successful!', {
+        description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
+        position: 'bottom-center',
+        duration: 4000,
+      });
+    } catch (error) {
+      toast.error('Login Failed. Please check your credentials.', {
+        position: 'bottom-center',
+        duration: 4000,
+      });
+    }
   };
 
   const handleScaleSelection = (scale: string) => {

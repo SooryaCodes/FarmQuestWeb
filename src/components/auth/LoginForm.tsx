@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import {  Check, X } from "lucide-react";
 
 interface LoginFormProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (email: string, password: string) => void;
 }
 
 export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
@@ -98,10 +98,12 @@ export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
     if (validateForm()) {
       setIsSubmitting(true);
       
+      // Call onLoginSuccess with email and password
+      onLoginSuccess(email, password);
+
       // Simulate API call
       setTimeout(() => {
         setIsSubmitting(false);
-        onLoginSuccess();
       }, 1500);
     } else {
       // Error toast with sonner

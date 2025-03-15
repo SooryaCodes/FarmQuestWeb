@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import AddFarmModal from "@/components/farms/AddFarmModal";
+import axios from "@/lib/axios";
 
 type FarmType = {
   id: number;
@@ -13,41 +14,79 @@ type FarmType = {
   location: string;
   image: string;
   status: "Active" | "Inactive";
-  area?: string;
-  crops?: number;
+  area?: number;
+  type: string;
+  description?: string;
 };
+
+const dummyFarms = [
+  {
+    id: 1,
+    name: "Kochi Terrace Garden",
+    image: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    status: "Active" as "Active" | "Inactive",
+    location: "Ernakulam, Kerala",
+    area: 120,
+    type: "Terrace",
+    description: "A beautiful terrace garden with a variety of vegetables and herbs. Perfect for urban farming in limited space."
+  },
+  {
+    id: 2,
+    name: "Trivandrum Vertical Setup",
+    image: "https://images.unsplash.com/photo-1618812493723-9410a2d66bc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    status: "Active" as "Active" | "Inactive",
+    location: "Thiruvananthapuram, Kerala",
+    area: 80,
+    type: "Vertical",
+    description: "An innovative vertical farming setup that maximizes growing space using stacked layers. Great for leafy greens and herbs."
+  },
+  {
+    id: 3,
+    name: "Kozhikode Portable Farm",
+    image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    status: "Inactive" as "Active" | "Inactive",
+    location: "Kozhikode, Kerala",
+    area: 50,
+    type: "Portable",
+    description: "A mobile farming solution that can be relocated as needed. Perfect for seasonal crops and experimental farming."
+  },
+  {
+    id: 4,
+    name: "Munnar Hydroponic Setup",
+    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    status: "Active" as "Active" | "Inactive",
+    location: "Idukki, Kerala",
+    area: 65,
+    type: "Hydroponic",
+    description: "A soil-less farming system using nutrient-rich water solutions. Ideal for growing plants faster with less water and space."
+  },
+];
 
 export default function FarmsPage() {
   const [activeFilter, setActiveFilter] = useState<"All" | "Active" | "Inactive">("All");
   const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
+  const [farms, setFarms] = useState<FarmType[]>(dummyFarms);
   
-  const [farms] = useState<FarmType[]>([
-    {
-      id: 1,
-      name: "Akhil's Farm",
-      location: "Thrissur, Kerala",
-      image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      status: "Active",
-      area: "120 sq.ft",
-    },
-    {
-      id: 2,
-      name: "Green Valley Farm",
-      location: "Kochi, Kerala",
-      image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      status: "Active",
-      area: "150 sq.ft",
-    },
-    {
-      id: 3,
-      name: "Riverside Plantation",
-      location: "Alappuzha, Kerala",
-      image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      status: "Inactive",
-      area: "80 sq.ft",
-    },
-  ]);
+  useEffect(() => {
+    const fetchFarms = async () => {
+      try {
+        const response = await axios.get('/farms', {
+          params: {
+            page: 1,
+            size: 100,
+            search: '',
+          },
+        });
+        setFarms(response.data.length > 0 ? response.data : dummyFarms); // Use dummy data if API returns nothing
+      } catch (error) {
+        console.error("Error fetching farms:", error);
+        setFarms(dummyFarms); // Use dummy data on error
+      }
+    };
+
+    fetchFarms();
+  }, []);
 
   const filteredFarms = farms.filter((farm) => {
     if (activeFilter === "All") return true;
@@ -67,9 +106,10 @@ export default function FarmsPage() {
       id: farms.length + 1,
       name: farmData.name,
       location: farmData.location,
-      image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      image: "https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       status: "Active",
-      area: farmData.area,
+      area: parseFloat(farmData.area),
+      type: farmData.type,
     };
     console.log(newFarm);
     
@@ -78,6 +118,11 @@ export default function FarmsPage() {
     
     // Close the modal
     setIsAddModalOpen(false);
+  };
+
+  const handleFarmClick = (farm: FarmType) => {
+    // Store the farm data in localStorage
+    localStorage.setItem('selectedFarm', JSON.stringify(farm));
   };
 
   return (
@@ -179,17 +224,17 @@ export default function FarmsPage() {
         className="bg-gradient-to-r from-green-100 to-green-50 min-h-28 md:min-h-40 rounded-2xl relative p-6 md:p-8 mb-8 flex justify-between items-center overflow-hidden shadow-sm"
       >
         <div className="z-10 max-w-lg">
-          <h3 className="text-2xl md:text-3xl font-bold mb-2">Indoor Farming</h3>
-          <p className="text-sm md:text-base text-gray-700 mb-4">Optimize your home farming with smart monitoring and sustainable practices</p>
+          <h3 className="text-2xl md:text-3xl font-bold mb-2">Kerala Home Farming</h3>
+          <p className="text-sm md:text-base text-gray-700 mb-4">Grow your own organic vegetables with traditional Kerala farming techniques adapted for home spaces</p>
           <button className="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-green-800 transition-colors">
-            Get Growing Tips
+            Kerala Farming Tips
           </button>
         </div>
         <div className="absolute right-0 top-0 h-full w-1/2 md:w-2/5">
           <div className="relative h-full w-full">
             <img
-              src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-              alt="Indoor farming"
+              src="https://images.unsplash.com/photo-1621955964441-c173e01c6f3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+              alt="Kerala home farming"
               className="object-cover rounded-r-2xl absolute inset-0 h-full w-full"
             />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent to-green-100/90"></div>
@@ -216,7 +261,7 @@ export default function FarmsPage() {
         ))}
       </div>
 
-      {/* Stats Overview - Updated for home farming */}
+      {/* Stats Overview - Updated for Kerala home farming */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
           <p className="text-gray-500 text-sm">Total Setups</p>
@@ -228,7 +273,7 @@ export default function FarmsPage() {
         </div>
         <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
           <p className="text-gray-500 text-sm">Total Space</p>
-          <h4 className="text-2xl font-bold">350 sq.ft</h4>
+          <h4 className="text-2xl font-bold">{farms.reduce((total, farm) => total + (farm.area || 0), 0)} sq.ft</h4>
         </div>
       </div>
 
@@ -241,7 +286,11 @@ export default function FarmsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <Link href={`/farm-detail`} className="block h-full">
+            <Link 
+              href={`/farm/${farm.id}`} 
+              className="block h-full"
+              onClick={() => handleFarmClick(farm)}
+            >
               <Card className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 border border-gray-100 rounded-xl">
                 <div className="relative h-60 w-full overflow-hidden">
                   <img
@@ -307,7 +356,7 @@ export default function FarmsPage() {
                     >
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     </svg>
-                    <span className="text-sm text-gray-600">Indoor Setup</span>
+                    <span className="text-sm text-gray-600">{farm.type} Setup</span>
                   </div>
                   <motion.button 
                     whileHover={{ scale: 1.1 }}
