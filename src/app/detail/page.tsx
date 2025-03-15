@@ -195,6 +195,36 @@ export default function PlantDetailPage() {
                 </Link>
               </div>
             </div>
+
+            {/* You Might Also Like Section */}
+            <div className="mt-8 md:mt-12">
+              <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">You Might Also Like</h2>
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+                {Array(4).fill(0).map((_, index) => (
+                  <Link key={index} href={`/detail`} className="bg-gray-50 rounded-xl p-3 md:p-4 transition-all hover:shadow-md">
+                    <div className="relative h-24 md:h-40 w-full mb-2 md:mb-4">
+                      <Image
+                        src={`/images/plant-${(index % 5) + 1 || 1}.png`}
+                        alt="Related Plant"
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                    <h3 className="font-semibold text-sm md:text-base">Related Plant {index + 1}</h3>
+                    <p className="text-xs md:text-sm text-gray-500 mb-1 md:mb-2">Indoor</p>
+                    <div className="flex justify-between items-center">
+                      <span className="font-bold text-sm md:text-base">${(99 + index * 20).toFixed(2)}</span>
+                      <div className="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-500">
+                          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                        </svg>
+                        <span className="text-xs md:text-sm ml-1">4</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>

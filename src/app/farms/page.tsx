@@ -23,7 +23,7 @@ const dummyFarms = [
   {
     id: 1,
     name: "Kochi Terrace Garden",
-    image: "https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     status: "Active" as "Active" | "Inactive",
     location: "Ernakulam, Kerala",
     area: 120,
@@ -33,7 +33,7 @@ const dummyFarms = [
   {
     id: 2,
     name: "Trivandrum Vertical Setup",
-    image: "https://images.unsplash.com/photo-1618812493723-9410a2d66bc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     status: "Active" as "Active" | "Inactive",
     location: "Thiruvananthapuram, Kerala",
     area: 80,
@@ -43,7 +43,7 @@ const dummyFarms = [
   {
     id: 3,
     name: "Kozhikode Portable Farm",
-    image: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     status: "Inactive" as "Active" | "Inactive",
     location: "Kozhikode, Kerala",
     area: 50,
@@ -53,7 +53,7 @@ const dummyFarms = [
   {
     id: 4,
     name: "Munnar Hydroponic Setup",
-    image: "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+    image: "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     status: "Active" as "Active" | "Inactive",
     location: "Idukki, Kerala",
     area: 65,
@@ -106,7 +106,7 @@ export default function FarmsPage() {
       id: farms.length + 1,
       name: farmData.name,
       location: farmData.location,
-      image: "https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      image: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
       status: "Active",
       area: parseFloat(farmData.area),
       type: farmData.type,
@@ -233,7 +233,7 @@ export default function FarmsPage() {
         <div className="absolute right-0 top-0 h-full w-1/2 md:w-2/5">
           <div className="relative h-full w-full">
             <img
-              src="https://images.unsplash.com/photo-1621955964441-c173e01c6f3a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+              src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               alt="Kerala home farming"
               className="object-cover rounded-r-2xl absolute inset-0 h-full w-full"
             />

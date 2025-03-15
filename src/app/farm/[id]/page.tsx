@@ -249,7 +249,7 @@ export default function FarmDetailPage() {
         </div>
       </div>
 
-      {/* Desktop Additional Information - Simplified */}
+      {/* Desktop Additional Information - Simplified and Improved */}
       <div className="hidden md:grid grid-cols-3 gap-6 mt-8 mb-16">
         <div className="bg-white rounded-xl p-5 shadow-sm">
           <h3 className="text-base font-bold mb-3 flex items-center">
@@ -308,8 +308,77 @@ export default function FarmDetailPage() {
         <div className="bg-white rounded-xl p-5 shadow-sm">
           <h3 className="text-base font-bold mb-3 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
-      
-      {/* ... existing code ... */}
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+            Growth Timeline
+          </h3>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="flex-1 h-1 bg-green-100 rounded-full">
+                <div className="w-2/3 h-full bg-green-500 rounded-full"></div>
+              </div>
+            </div>
+            <div className="flex justify-between text-xs text-gray-600">
+              <span>Germination</span>
+              <span>Vegetative</span>
+              <span>Flowering</span>
+              <span>Fruiting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Action Buttons - Desktop */}
+      <div className="hidden md:flex justify-center gap-4 mt-8 mb-16">
+        <Link href={'/progress'} className="bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+            <path d="M12 2v8" />
+            <path d="m4.93 10.93 1.41 1.41" />
+            <path d="M2 18h2" />
+            <path d="M20 18h2" />
+            <path d="m19.07 10.93-1.41 1.41" />
+            <path d="M22 22H2" />
+            <path d="M16 6 8 14" />
+            <path d="M16 14H8" />
+          </svg>
+          Track Growth
+        </Link>
+        <button className="bg-white text-green-600 border border-green-600 px-6 py-2.5 rounded-lg font-medium hover:bg-green-50 transition-colors flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" x2="12" y1="2" y2="15" />
+          </svg>
+          Share Farm
+        </button>
+      </div>
+
+      {/* Mobile Action Buttons - Fixed at bottom */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg md:hidden flex justify-between">
+        <button className="bg-white text-green-600 border border-green-600 px-4 py-2 rounded-lg font-medium flex-1 mr-2 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+            <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+            <polyline points="16 6 12 2 8 6" />
+            <line x1="12" x2="12" y1="2" y2="15" />
+          </svg>
+          Share
+        </button>
+        <Link href={'/progress'} className="bg-green-600 text-white px-4 py-2 rounded-lg font-medium flex-1 ml-2 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+            <path d="M12 2v8" />
+            <path d="m4.93 10.93 1.41 1.41" />
+            <path d="M2 18h2" />
+            <path d="M20 18h2" />
+            <path d="m19.07 10.93-1.41 1.41" />
+            <path d="M22 22H2" />
+            <path d="M16 6 8 14" />
+            <path d="M16 14H8" />
+          </svg>
+          Track Growth
+        </Link>
+      </div>
     </div>
   );
 } 

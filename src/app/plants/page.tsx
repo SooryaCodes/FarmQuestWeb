@@ -1,60 +1,145 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import axios from "@/lib/axios";
 
 type PlantType = {
   id: number;
   name: string;
-  type: "Outdoor" | "Indoor" | "Outdoor & Indoor";
-  image: string;
+  type: string;
+  image?: string;
+  full_image_url?: string;
+  cropped_image_url?: string;
+  description?: string;
+  basic_needs?: string[];
+  tags?: string[];
+  price?: number;
+  rating?: number;
+  isPopular?: boolean;
 };
 
-const plants: PlantType[] = [
+// Updated dummy plants data to match API schema
+const dummyPlants: PlantType[] = [
   {
     id: 1,
     name: "Tomato Plant",
     type: "Outdoor",
-    image: "/images/plant.png",
+    image: "/images/plant-1.png",
+    full_image_url: "/images/plant-1.png",
+    cropped_image_url: "/images/plant-1.png",
+    description: "A versatile plant that produces juicy red fruits. Perfect for salads and cooking.",
+    basic_needs: ["Sunlight", "Regular watering", "Well-drained soil"],
+    tags: ["Vegetable", "Easy to grow", "Popular"],
+    price: 299,
+    rating: 4,
+    isPopular: true,
   },
   {
     id: 2,
     name: "Banana Tree",
     type: "Outdoor",
     image: "/images/plant-2.png",
+    full_image_url: "/images/plant-2.png",
+    cropped_image_url: "/images/plant-2.png",
+    description: "Tropical fruit tree that grows quickly and produces sweet, nutritious fruits.",
+    basic_needs: ["Full sun", "Rich soil", "Regular watering"],
+    tags: ["Fruit", "Tropical", "Tall"],
+    price: 499,
+    rating: 4,
+    isPopular: false,
   },
   {
     id: 3,
     name: "Spinach Plant",
     type: "Outdoor & Indoor",
-    image: "/images/plant.png",
+    image: "/images/plant-3.png",
+    full_image_url: "/images/plant-3.png",
+    cropped_image_url: "/images/plant-3.png",
+    description: "Leafy green vegetable rich in iron and vitamins. Quick growing and easy to maintain.",
+    basic_needs: ["Partial shade", "Moist soil", "Cool weather"],
+    tags: ["Leafy green", "Nutritious", "Quick harvest"],
+    price: 199,
+    rating: 5,
+    isPopular: true,
   },
   {
     id: 4,
     name: "Carrot Plant",
     type: "Indoor",
-    image: "/images/plant-2.png",
+    image: "/images/plant-4.png",
+    full_image_url: "/images/plant-4.png",
+    cropped_image_url: "/images/plant-4.png",
+    description: "Root vegetable that's easy to grow and packed with nutrients.",
+    basic_needs: ["Full sun", "Loose soil", "Regular watering"],
+    tags: ["Root vegetable", "Beginner-friendly", "Compact"],
+    price: 249,
+    rating: 4,
+    isPopular: false,
   },
   {
     id: 5,
     name: "Pepper Plant",
     type: "Indoor",
-    image: "/images/plant.png",
+    image: "/images/plant-5.png",
+    full_image_url: "/images/plant-5.png",
+    cropped_image_url: "/images/plant-5.png",
+    description: "Versatile plant that produces spicy or sweet peppers depending on variety.",
+    basic_needs: ["Full sun", "Well-drained soil", "Warm temperature"],
+    tags: ["Vegetable", "Container-friendly", "Colorful"],
+    price: 349,
+    rating: 4,
+    isPopular: true,
   },
 ];
 
 type FilterType = "All" | "Indoor" | "Outdoor" | "Popular";
 
 export default function PlantsPage() {
-  const [activeFilter, setActiveFilter] = useState<FilterType>("Indoor");
+  const [activeFilter, setActiveFilter] = useState<FilterType>("All");
+  const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [plants, setPlants] = useState<PlantType[]>(dummyPlants);
+  const [loading, setLoading] = useState(true);
+
+  // Add useEffect to fetch plants/crops data from API
+  useEffect(() => {
+    const fetchPlants = async () => {
+      setLoading(true);
+      try {
+        // Try to fetch from API first
+        const response = await axios.get('/crops', {
+          params: {
+            page: 1,
+            size: 100,
+            search: searchQuery,
+          },
+        });
+        setPlants(response.data.length > 0 ? response.data : dummyPlants); // Use dummy data if API returns nothing
+      } catch (error) {
+        console.error("Error fetching plants:", error);
+        setPlants(dummyPlants); // Use dummy data on error
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlants();
+  }, [searchQuery]);
+
+  // Add handlePlantClick function to store plant data in localStorage
+  const handlePlantClick = (plant: PlantType) => {
+    // Store the plant data in localStorage
+    localStorage.setItem('selectedPlant', JSON.stringify(plant));
+  };
 
   const filteredPlants = plants.filter((plant) => {
     if (activeFilter === "All") return true;
     if (activeFilter === "Indoor") return plant.type.includes("Indoor");
     if (activeFilter === "Outdoor") return plant.type.includes("Outdoor");
-    if (activeFilter === "Popular") return true; // For demo, all plants are popular
+    if (activeFilter === "Popular") return plant.isPopular;
     return true;
   });
 
@@ -80,75 +165,58 @@ export default function PlantsPage() {
         ))}
       </div>
       
-      {/* Plant Grid - Normal layout on desktop, current layout on mobile */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {filteredPlants.map((plant, index) => (
-          <div key={plant.id} className={cn(
-            "relative",
-            // Only apply staggered layout on mobile, not on desktop (md and above)
-            (index % 4 === 1 || index % 4 === 2) ? "md:mt-0 mt-12" : ""
-          )}>
-            <PlantCard plant={plant} />
+      {/* Plants Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        {loading ? (
+          // Loading skeleton
+          Array(8).fill(0).map((_, index) => (
+            <div key={index} className="bg-gray-100 rounded-3xl p-4 animate-pulse h-64"></div>
+          ))
+        ) : filteredPlants.length > 0 ? (
+          filteredPlants.map((plant) => (
+            <Link 
+              key={plant.id} 
+              href={`/plant/${plant.id}`}
+              onClick={() => handlePlantClick(plant)}
+              className="bg-gray-100 rounded-3xl p-4 transition-all hover:shadow-md"
+            >
+              <div className="relative h-40 w-full mb-4">
+                <Image
+                  src={plant.image || plant.cropped_image_url || "/images/plant-1.png"}
+                  alt={plant.name}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="font-semibold text-lg">{plant.name}</h3>
+              <p className="text-sm text-gray-500 mb-2">{plant.type}</p>
+              <div className="flex justify-between items-center">
+                <span className="font-bold">{plant.price ? `₹${plant.price}` : ""}</span>
+                <div className="flex items-center">
+                  {plant.rating && (
+                    <div className="flex items-center mr-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-yellow-500">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                      </svg>
+                      <span className="text-sm ml-1">{plant.rating}</span>
+                    </div>
+                  )}
+                  <button className="bg-green-600 text-white rounded-full p-1.5 flex items-center justify-center w-7 h-7 hover:bg-green-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14" />
+                      <path d="M12 5v14" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="col-span-full text-center py-10">
+            <p className="text-gray-500">No plants found matching your criteria.</p>
           </div>
-        ))}
+        )}
       </div>
     </div>
-  );
-}
-
-function PlantCard({ plant }: { plant: PlantType }) {
-  return (
-    <Link href="/detail" className="relative pt-24 md:pt-0">
-      {/* Mobile: Image positioned outside card */}
-      <div className="md:hidden absolute scale-150 top-6 left-1/2 transform -translate-x-1/2 z-10">
-        <Image
-          src={plant.image}
-          alt={plant.name}
-          width={250}
-          height={250}
-          className="object-contain"
-        />
-      </div>
-      
-      {/* Card content */}
-      <div className="bg-gray-100 rounded-3xl p-4 pt-16 md:p-6 relative z-0">
-        {/* Desktop: Image positioned inside card at the top */}
-        <div className="hidden md:block mb-4">
-          <Image
-            src={plant.image}
-            alt={plant.name}
-            width={200}
-            height={200}
-            className="object-contain mx-auto"
-          />
-        </div>
-        
-        <div className="mt-auto">
-          <h3 className="text-xl font-bold">{plant.name}</h3>
-          <p className="text-gray-500 text-sm mb-4">{plant.type}</p>
-          
-          <div className="flex justify-between items-center">
-            <button className="bg-white text-black text-sm py-1.5 px-4 rounded-full border border-gray-200 shadow-sm hover:bg-green-50 transition-colors">
-              Add to cart
-            </button>
-            <button className="bg-black text-white rounded-full p-2 flex items-center justify-center w-8 h-8 hover:bg-green-800 transition-colors">
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="16" 
-                height="16" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              >
-                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </Link>
   );
 } 
