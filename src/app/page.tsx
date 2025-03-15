@@ -458,6 +458,278 @@ export default function Home() {
           </div>
         </div>
         
+        {/* Carbon Credits Impact Section - NEW */}
+        <div className="py-24 bg-black relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <svg className="w-full h-full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#77AD3F" strokeWidth="1" />
+                </pattern>
+                <pattern id="circles" width="100" height="100" patternUnits="userSpaceOnUse">
+                  <circle cx="50" cy="50" r="20" fill="none" stroke="#0F6435" strokeWidth="1" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#grid)" />
+              <rect width="100%" height="100%" fill="url(#circles)" />
+            </svg>
+          </div>
+          
+          {/* Glowing orbs */}
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#77AD3F] filter blur-[100px] opacity-20"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-[#0F6435] filter blur-[120px] opacity-15"></div>
+          
+          <div className="max-w-7xl mx-auto px-8 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-center mb-16"
+            >
+              <span className="inline-block px-4 py-1 bg-[#77AD3F]/30 text-[#77AD3F] rounded-full text-sm font-medium mb-4">
+                Environmental Impact
+              </span>
+              <h2 className="text-4xl font-bold text-white mb-4">Our Carbon Credit Ecosystem</h2>
+              <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+                Together, we're making a measurable difference in the fight against climate change
+              </p>
+            </motion.div>
+            
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+              {[
+                {
+                  value: "2.7M",
+                  label: "Trees Planted",
+                  icon: <Leaf className="h-6 w-6" />,
+                  trend: "+12% this month"
+                },
+                {
+                  value: "45K",
+                  label: "Active Farmers",
+                  icon: <Users className="h-6 w-6" />,
+                  trend: "+8% this month"
+                },
+                {
+                  value: "186K",
+                  label: "Carbon Credits",
+                  icon: <Globe className="h-6 w-6" />,
+                  trend: "+15% this month"
+                },
+                {
+                  value: "97%",
+                  label: "Sustainability Score",
+                  icon: <Award className="h-6 w-6" />,
+                  trend: "+3% this month"
+                }
+              ].map((stat, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="bg-gray-900 border border-[#77AD3F]/30 rounded-xl p-6 hover:bg-gray-800 transition-colors duration-300"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="bg-[#77AD3F]/20 p-3 rounded-full">
+                      <div className="text-[#77AD3F]">{stat.icon}</div>
+                    </div>
+                    <span className="text-[#77AD3F] text-sm font-medium">{stat.trend}</span>
+                  </div>
+                  <h3 className="text-3xl font-bold text-white mb-1">{stat.value}</h3>
+                  <p className="text-gray-400">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* Graph and Info Section */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              {/* Left side - Graph */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="bg-gray-900 border border-[#77AD3F]/30 rounded-xl p-6 relative overflow-hidden"
+              >
+                <h3 className="text-xl font-semibold text-white mb-6">Carbon Credits Generated (2023-2024)</h3>
+                
+                {/* SVG Graph */}
+                <div className="relative h-64">
+                  <svg className="w-full h-full" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                    {/* Grid lines */}
+                    <g className="grid-lines">
+                      {[0, 1, 2, 3, 4].map((i) => (
+                        <line 
+                          key={i} 
+                          x1="0" 
+                          y1={i * 50} 
+                          x2="400" 
+                          y2={i * 50} 
+                          stroke="#333" 
+                          strokeWidth="1" 
+                          strokeDasharray="5,5" 
+                        />
+                      ))}
+                    </g>
+                    
+                    {/* X-axis labels */}
+                    <g className="x-labels text-xs" textAnchor="middle">
+                      {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month, i) => (
+                        <text key={i} x={i * 33 + 16} y="220" fill="#999">{month}</text>
+                      ))}
+                    </g>
+                    
+                    {/* Area chart */}
+                    <defs>
+                      <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#77AD3F" stopOpacity="0.5" />
+                        <stop offset="100%" stopColor="#0F6435" stopOpacity="0.1" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Line chart */}
+                    <path 
+                      d="M0,180 C20,160 40,150 60,140 C80,130 100,120 120,100 C140,80 160,70 180,60 C200,50 220,45 240,40 C260,35 280,30 300,25 C320,20 340,15 360,10 C380,5 400,0 400,0" 
+                      fill="none" 
+                      stroke="#77AD3F" 
+                      strokeWidth="3" 
+                    />
+                    
+                    {/* Area under the line */}
+                    <path 
+                      d="M0,180 C20,160 40,150 60,140 C80,130 100,120 120,100 C140,80 160,70 180,60 C200,50 220,45 240,40 C260,35 280,30 300,25 C320,20 340,15 360,10 C380,5 400,0 400,0 V200 H0 Z" 
+                      fill="url(#greenGradient)" 
+                    />
+                    
+                    {/* Data points */}
+                    {[
+                      {x: 0, y: 180}, {x: 33, y: 150}, {x: 66, y: 140}, 
+                      {x: 99, y: 100}, {x: 132, y: 60}, {x: 165, y: 40}, 
+                      {x: 198, y: 30}, {x: 231, y: 25}, {x: 264, y: 20}, 
+                      {x: 297, y: 15}, {x: 330, y: 10}, {x: 363, y: 5}
+                    ].map((point, i) => (
+                      <circle 
+                        key={i} 
+                        cx={point.x} 
+                        cy={point.y} 
+                        r="4" 
+                        fill="#77AD3F" 
+                        stroke="#0F6435" 
+                        strokeWidth="2" 
+                      />
+                    ))}
+                  </svg>
+                  
+                  {/* Y-axis labels */}
+                  <div className="absolute top-0 left-0 h-full flex flex-col justify-between text-xs text-gray-500 py-2">
+                    <span>200K</span>
+                    <span>150K</span>
+                    <span>100K</span>
+                    <span>50K</span>
+                    <span>0</span>
+                  </div>
+                </div>
+                
+                <div className="mt-6 flex justify-between items-center">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-[#77AD3F]"></div>
+                    <span className="text-gray-400 text-sm">Carbon Credits</span>
+                  </div>
+                  <span className="text-[#77AD3F] font-medium">+186% YoY Growth</span>
+                </div>
+              </motion.div>
+              
+              {/* Right side - Info */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className="space-y-6"
+              >
+                <h3 className="text-2xl font-bold text-white">How Our Carbon Credit System Works</h3>
+                <p className="text-gray-300">
+                  FarmQuest's innovative carbon credit system rewards sustainable farming practices while making a measurable impact on climate change.
+                </p>
+                
+                <div className="space-y-6 mt-8">
+                  {[
+                    {
+                      title: "Plant & Earn",
+                      description: "Each plant you grow generates carbon credits based on its CO2 absorption capacity.",
+                      icon: <Sprout className="h-6 w-6" />
+                    },
+                    {
+                      title: "Verified Impact",
+                      description: "Our blockchain technology ensures transparent tracking of every credit generated.",
+                      icon: <ShieldCheck className="h-6 w-6" />
+                    },
+                    {
+                      title: "Marketplace",
+                      description: "Sell your carbon credits to businesses looking to offset their emissions.",
+                      icon: <BarChart3 className="h-6 w-6" />
+                    }
+                  ].map((item, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.2 + (i * 0.1) }}
+                      viewport={{ once: true, margin: "-100px" }}
+                      className="flex gap-4"
+                    >
+                      <div className="bg-[#77AD3F]/20 p-3 rounded-full h-fit">
+                        <div className="text-[#77AD3F]">{item.icon}</div>
+                      </div>
+                      <div>
+                        <h4 className="text-xl font-semibold text-white mb-2">{item.title}</h4>
+                        <p className="text-gray-400">{item.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                
+                <div className="bg-gray-900 border border-[#77AD3F]/30 rounded-xl p-6 mt-8">
+                  <div className="flex justify-between items-center mb-4">
+                    <h4 className="text-white font-semibold">Total Environmental Impact</h4>
+                    <span className="text-[#77AD3F]">Last updated: Today</span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-gray-400 text-sm">CO₂ Offset</p>
+                      <p className="text-2xl font-bold text-white">12,450 tons</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400 text-sm">Water Saved</p>
+                      <p className="text-2xl font-bold text-white">8.3M gallons</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+            
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="mt-16 text-center"
+            >
+              <button className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white hover:from-[#6A9D35] hover:to-[#0A5A2F] transition-colors duration-300 font-semibold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-transform flex items-center justify-center mx-auto">
+                <Globe className="mr-2 h-5 w-5" /> Join Our Carbon Credit Program
+              </button>
+              <p className="text-gray-400 mt-4">
+                Start making a difference today while earning rewards for your sustainable practices.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+        
         {/* Big CTA with Background Grid */}
         <div className="py-32 relative overflow-hidden">
           {/* Background Grid */}
@@ -741,34 +1013,6 @@ export default function Home() {
             </div>
           </div>
         </motion.div>
-        
-        {/* Animated background elements */}
-        <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-          <motion.div
-            animate={{ 
-              y: [0, -10, 0],
-              opacity: [0.1, 0.2, 0.1]
-            }}
-            transition={{ 
-              repeat: Infinity,
-              duration: 8,
-              ease: "easeInOut"
-            }}
-            className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[#77AD3F] filter blur-3xl opacity-10"
-          />
-          <motion.div
-            animate={{ 
-              y: [0, 10, 0],
-              opacity: [0.1, 0.15, 0.1]
-            }}
-            transition={{ 
-              repeat: Infinity,
-              duration: 10,
-              ease: "easeInOut"
-            }}
-            className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-[#0F6435] filter blur-3xl opacity-10"
-          />
-        </div>
       </div>
 
      

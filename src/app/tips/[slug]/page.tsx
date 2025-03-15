@@ -14,6 +14,8 @@ interface TipItem {
   slug: string;
   category?: string;
   content?: string;
+  date?: string;
+  excerpt?: string;
   steps?: {
     title: string;
     description: string;
@@ -273,9 +275,9 @@ export default function TipsDetailPage() {
                     </div>
                   </div>
                   <CardContent className="p-5 flex-grow">
-                    <div className="text-gray-500 text-sm mb-2">{item.date}</div>
+                    <div className="text-gray-500 text-sm mb-2">{item.date || ''}</div>
                     <h3 className="text-lg font-bold text-gray-800 mb-2 line-clamp-2">{item.title}</h3>
-                    <p className="text-gray-600 text-sm line-clamp-2 mb-4">{item.excerpt}</p>
+                    <p className="text-gray-600 text-sm line-clamp-2 mb-4">{item.excerpt || item.content}</p>
                     <Link 
                       href={`/tips/${item.slug}`} 
                       className="text-green-600 hover:text-green-700 text-sm font-medium flex items-center gap-1"
