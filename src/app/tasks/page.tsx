@@ -254,7 +254,7 @@ export default function TasksPage() {
               <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
                 <div className="flex justify-between items-center mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-gray-800">Today's Tasks</h2>
+                    <h2 className="text-2xl font-bold text-gray-800">Today&apos;s Tasks</h2>
                     <p className="text-gray-600">Complete these tasks to earn Quest Coins</p>
                   </div>
                   <div className="bg-blue-50 px-3 py-1 rounded-lg text-sm font-medium text-blue-600">
