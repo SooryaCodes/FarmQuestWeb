@@ -39,6 +39,7 @@ export default function LoginPage() {
         duration: 4000,
       });
     } catch (error) {
+      console.log(error)
       toast.error('Login Failed. Please check your credentials.', {
         position: 'bottom-center',
         duration: 4000,

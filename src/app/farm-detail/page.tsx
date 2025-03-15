@@ -1,21 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import UserPoints from "@/components/UserPoints"; // Import the new component
-import axios from "@/lib/axios";
 
-type FarmType = {
-  id: number;
-  name: string;
-  location: string;
-  image: string;
-  status: "Active" | "Inactive";
-  area?: number;
-  type: string;
-  description?: string;
-};
+
 
 export default function FarmDetailPage() {
   const [showFullDescription, setShowFullDescription] = useState(false);

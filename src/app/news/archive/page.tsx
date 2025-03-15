@@ -3,18 +3,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Define the NewsItem interface
-interface NewsItem {
-  id: number;
-  title: string;
-  image: string;
-  slug: string;
-  category?: string;
-  date?: string;
-  excerpt?: string;
-}
 
 // Enhanced news data with Unsplash images and more realistic content
 const newsItems = [

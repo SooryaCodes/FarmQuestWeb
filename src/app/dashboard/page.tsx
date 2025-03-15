@@ -165,7 +165,7 @@ export default function PlantShopPage() {
   const [plants, setPlants] = useState<PlantType[]>(dummyPlants);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState<string>("");
-
+console.log(loading,setSearchQuery)
   // Add user information
   const userInfo = {
     name: "Alex Johnson",

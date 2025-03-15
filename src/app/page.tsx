@@ -653,7 +653,7 @@ export default function Home() {
               >
                 <h3 className="text-2xl font-bold text-white">How Our Carbon Credit System Works</h3>
                 <p className="text-gray-300">
-                  FarmQuest's innovative carbon credit system rewards sustainable farming practices while making a measurable impact on climate change.
+                  FarmQuest&apos;s innovative carbon credit system rewards sustainable farming practices while making a measurable impact on climate change.
                 </p>
                 
                 <div className="space-y-6 mt-8">
@@ -835,14 +835,14 @@ export default function Home() {
                 },
                 {
                   question: "What if my crops fail?",
-                  answer: "We've got you covered! Our expert support team is here to help you troubleshoot."
+                  answer: "We&apos;ve got you covered! Our expert support team is here to help you troubleshoot."
                 },
                 {
                   question: "How long does it take to grow crops?",
                   answer: "It depends on the crop type, but most crops take 4–8 weeks to reach harvest."
                 },
                 {
-                  question: "What if I don't have outdoor space?",
+                  question: "What if I don&apos;t have outdoor space?",
                   answer: "No worries! We offer indoor farming kits with everything you need."
                 },
                 {
