@@ -156,6 +156,7 @@ export default function PlantDetailPage() {
           <Link
             href="/dashboard"
             className="absolute top-6 left-6 w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md z-10 md:block hidden"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +169,8 @@ export default function PlantDetailPage() {
               strokeLinecap="round"
               strokeLinejoin="round"
             >
-              <path d="M19 12H5M12 19l-7-7 7-7" />
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
           </Link>
           <div className="relative h-80 w-full">

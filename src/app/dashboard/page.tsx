@@ -400,7 +400,7 @@ console.log(loading,setSearchQuery)
         </div>
         <div className="absolute right-0 h-40 w-40 md:h-48 md:w-48">
           <Image
-            src="/images/plant.png"
+            src="/images/plant-1.png"
             alt="Promo plant"
             fill
             className="object-contain"

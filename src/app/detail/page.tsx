@@ -46,7 +46,7 @@ export default function PlantDetailPage() {
             {/* Plant Image */}
             <div className="flex justify-center mb-6">
               <Image 
-                src="/images/plant.png" 
+                src="/images/plant-1.png" 
                 alt="Tomato Plant" 
                 width={250} 
                 height={250} 
@@ -125,7 +125,7 @@ export default function PlantDetailPage() {
               <ArrowLeft className="text-gray-700" size={20} />
             </Link>
             <Image 
-              src="/images/plant.png" 
+              src="/images/plant-1.png" 
               alt="Tomato Plant" 
               width={400} 
               height={400} 
