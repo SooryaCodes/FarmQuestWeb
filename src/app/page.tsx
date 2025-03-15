@@ -28,7 +28,7 @@ export default function Home() {
       {/* Mobile View */}
       <div className="md:hidden">
         <div className="relative h-screen flex flex-col">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#77AD3F]/20 to-transparent z-0"></div>
+          <div className="absolute inset-0 bg-white z-0"></div>
           
           <div className="z-10 p-6 flex justify-between items-center">
             <Logo />
@@ -44,6 +44,8 @@ export default function Home() {
             >
               <HeroImage />
             </motion.div>
+            
+            
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}

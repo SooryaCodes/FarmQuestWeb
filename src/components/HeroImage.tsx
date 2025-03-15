@@ -4,7 +4,7 @@ export default function HeroImage() {
   return (
     <div className="relative w-full aspect-square max-w-xl">
       <Image 
-        src="/images/globe.svg" 
+        src="/images/globe.png" 
         alt="Global reforestation network" 
         fill
         className="object-contain"
