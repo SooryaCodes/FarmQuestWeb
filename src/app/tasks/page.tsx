@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Clock, ArrowRight, Check, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
+import UserPoints from "@/components/UserPoints"; // Import the new component
 
 // Define a type for card styles
 type CardStyle = {
@@ -65,8 +66,16 @@ export default function TasksPage() {
     router.push('/dashboard');
   };
 
+  const userPoints = {
+    exp: 150, // Example EXP value
+    coins: 25, // Example coins value
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
+      {/* User Points Section */}
+      <UserPoints exp={userPoints.exp} coins={userPoints.coins} />
+
       {/* Mobile view */}
       {isMobile ? (
         <>

@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowLeft, MoreHorizontal, X, Bell, Coins, Calendar, CheckCircle, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import UserPoints from "@/components/UserPoints"; // Import the new component
 
 export default function ProgressPage() {
   // Sample data for task progress
@@ -28,6 +29,11 @@ export default function ProgressPage() {
     total: 1250,
     todayEarned: 85,
     weeklyGoal: 2000
+  };
+
+  const userPoints = {
+    exp: 150, // Example EXP value
+    coins: 25, // Example coins value
   };
 
   return (
@@ -196,6 +202,9 @@ export default function ProgressPage() {
           </div>
         </div>
       </div>
+
+      {/* User Points Section */}
+      <UserPoints exp={userPoints.exp} coins={userPoints.coins} />
     </div>
   );
 }

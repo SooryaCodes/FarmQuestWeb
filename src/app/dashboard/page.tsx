@@ -7,6 +7,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import AddFarmModal from "@/components/farms/AddFarmModal";
+import UserPoints from "@/components/UserPoints";
 
 type PlantType = {
   id: number;
@@ -79,6 +80,11 @@ export default function PlantShopPage() {
     lastActive: "Today at 2:30 PM"
   };
 
+  const userPoints = {
+    exp: 150, // Example EXP value
+    coins: 25, // Example coins value
+  };
+
   const filteredPlants = plants.filter((plant) => {
     if (activeFilter === "All") return true;
     if (activeFilter === "Indoor") return plant.type === "Indoor";
@@ -101,6 +107,8 @@ export default function PlantShopPage() {
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-20 min-h-screen bg-white">
+      {/* User Points Section */}
+      <UserPoints exp={userPoints.exp} coins={userPoints.coins} />
       {/* User Profile Section */}
       <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
         <div className="flex items-center gap-3">

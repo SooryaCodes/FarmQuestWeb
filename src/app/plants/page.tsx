@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 type PlantType = {
   id: number;
@@ -22,7 +23,7 @@ const plants: PlantType[] = [
     id: 2,
     name: "Banana Tree",
     type: "Outdoor",
-    image: "/images/plant.png",
+    image: "/images/plant-2.png",
   },
   {
     id: 3,
@@ -34,7 +35,7 @@ const plants: PlantType[] = [
     id: 4,
     name: "Carrot Plant",
     type: "Indoor",
-    image: "/images/plant.png",
+    image: "/images/plant-2.png",
   },
   {
     id: 5,
@@ -97,7 +98,7 @@ export default function PlantsPage() {
 
 function PlantCard({ plant }: { plant: PlantType }) {
   return (
-    <div className="relative pt-24 md:pt-0">
+    <Link href="/detail" className="relative pt-24 md:pt-0">
       {/* Mobile: Image positioned outside card */}
       <div className="md:hidden absolute scale-150 top-6 left-1/2 transform -translate-x-1/2 z-10">
         <Image
@@ -148,6 +149,6 @@ function PlantCard({ plant }: { plant: PlantType }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 } 

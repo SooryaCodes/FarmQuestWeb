@@ -3,12 +3,21 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import UserPoints from "@/components/UserPoints"; // Import the new component
 
 export default function FarmDetailPage() {
   const [showFullDescription, setShowFullDescription] = useState(false);
   
+  const userPoints = {
+    exp: 150, // Example EXP value
+    coins: 25, // Example coins value
+  };
+
   return (
     <div className="container mx-auto px-4 py-6 pb-24 min-h-screen ">
+      {/* User Points Section */}
+      <UserPoints exp={userPoints.exp} coins={userPoints.coins} />
+
       {/* Header with back button */}
       <div className="flex items-center mb-6">
         <Link href="/farms" className="bg-white rounded-full p-2 shadow-md hover:bg-gray-50 transition-all">
