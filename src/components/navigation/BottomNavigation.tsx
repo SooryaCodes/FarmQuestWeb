@@ -35,8 +35,8 @@ export default function BottomNavigation() {
       icon: Newspaper,
     },
     {
-      label: "Profile",
-      href: "/profile",
+      label: "Tasks",
+      href: "/tasks",
       icon: User,
     },
   ];

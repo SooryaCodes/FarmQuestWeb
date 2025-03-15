@@ -102,7 +102,7 @@ export default function PlantShopPage() {
   return (
     <div className="container mx-auto px-4 py-6 md:py-20 min-h-screen bg-white">
       {/* User Profile Section */}
-      <div className="mb-8 flex justify-between items-center">
+      <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
         <div className="flex items-center gap-3">
           <div className="relative w-12 h-12 md:w-14 md:h-14">
             <Image
@@ -135,7 +135,7 @@ export default function PlantShopPage() {
             </div>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 self-end sm:self-auto">
           <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center cursor-pointer hover:bg-gray-200 transition-colors">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
