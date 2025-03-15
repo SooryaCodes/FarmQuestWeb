@@ -8,6 +8,7 @@ import { CheckCircle, Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award,
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 // Import BackgroundGrid with SSR disabled
 const BackgroundGrid = dynamic(
@@ -53,7 +54,7 @@ export default function Home() {
               <h2 className="text-4xl font-bold mb-4 text-gray-900">
                 <span className="text-[#0F6435]">Farm</span>Quest
               </h2>
-              <p className="text-lg text-gray-700">
+              <p className="text-xl text-gray-700">
                 Turn Your Thumb Green, No Experience Needed!
               </p>
             </motion.div>
@@ -153,7 +154,7 @@ export default function Home() {
               className="col-span-6 relative"
             >
               <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl border border-[#77AD3F]/20 overflow-hidden">
-              <img src="/images/globe.png" alt="Globe" className="w-full h-auto" />
+                <Image src="/images/globe.png" alt="Globe" width={500} height={300} className="w-full h-auto" />
               </div>
               
               {/* Improved floating stats cards with better visibility */}
@@ -376,13 +377,13 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
                 {
-                  quote: "It's fun, easy, and actually makes me money!",
+                  quote: "It&apos;s fun, easy, and actually makes me money!",
                   author: "Sarah K.",
                   role: "Urban Farmer",
                   image: "https://randomuser.me/api/portraits/women/44.jpg"
                 },
                 {
-                  quote: "I've never farmed before, but now I have fresh veggies AND extra cash!",
+                  quote: "I&apos;ve never farmed before, but now I have fresh veggies AND extra cash!",
                   author: "Michael T.",
                   role: "Beginner Farmer",
                   image: "https://randomuser.me/api/portraits/men/32.jpg"
@@ -409,9 +410,9 @@ export default function Home() {
                       </svg>
                     ))}
                   </div>
-                  <p className="text-gray-700 italic mb-6 text-lg">"{testimonial.quote}"</p>
+                  <p className="text-gray-700 italic mb-6 text-lg">&quot;{testimonial.quote}&quot;</p>
                   <div className="flex items-center">
-                    <img src={testimonial.image} alt={testimonial.author} className="w-12 h-12 rounded-full mr-4" />
+                    <Image src={testimonial.image} alt={testimonial.author} width={48} height={48} className="w-12 h-12 rounded-full mr-4" />
                     <div>
                       <p className="font-semibold text-gray-800">{testimonial.author}</p>
                       <p className="text-[#0F6435] text-sm">{testimonial.role}</p>
