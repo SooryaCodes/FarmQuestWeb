@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import AddFarmModal from "@/components/farms/AddFarmModal";
 
 type FarmType = {
   id: number;
@@ -20,6 +21,7 @@ type FarmType = {
 export default function FarmsPage() {
   const [activeFilter, setActiveFilter] = useState<"All" | "Active" | "Inactive">("All");
   const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   
   const [farms] = useState<FarmType[]>([
     {
@@ -53,8 +55,40 @@ export default function FarmsPage() {
     return farm.status === activeFilter;
   });
 
+  const handleAddFarm = (farmData: {
+    name: string;
+    location: string;
+    type: string;
+    description: string;
+    area: string;
+  }) => {
+    // Here you would typically send this data to your backend
+    // For now, we'll just add it to the local state
+    const newFarm: FarmType = {
+      id: farms.length + 1,
+      name: farmData.name,
+      location: farmData.location,
+      image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
+      status: "Active",
+      area: farmData.area,
+    };
+    
+    // Update farms state (you would need to modify this to use setFarms)
+    // setFarms([...farms, newFarm]);
+    
+    // Close the modal
+    setIsAddModalOpen(false);
+  };
+
   return (
     <div className="container mx-auto px-4 py-6 md:py-20 min-h-screen bg-white">
+      {/* Add Farm Modal */}
+      <AddFarmModal 
+        isOpen={isAddModalOpen} 
+        onClose={() => setIsAddModalOpen(false)} 
+        onSubmit={handleAddFarm} 
+      />
+      
       {/* Header with search - Responsive layout */}
       <div className="mb-6 md:mb-10">
         <div className="flex justify-between items-center mb-4">
@@ -93,17 +127,16 @@ export default function FarmsPage() {
                 </svg>
               </motion.div>
             </div>
-            <Link href="/farms/add">
-              <motion.div 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 md:w-12 md:h-12 bg-black rounded-full flex items-center justify-center hover:bg-green-800 transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-              </motion.div>
-            </Link>
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-10 h-10 md:w-12 md:h-12 bg-black rounded-full flex items-center justify-center hover:bg-green-800 transition-colors cursor-pointer"
+              onClick={() => setIsAddModalOpen(true)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </motion.div>
           </div>
         </div>
         
@@ -154,11 +187,10 @@ export default function FarmsPage() {
         </div>
         <div className="absolute right-0 top-0 h-full w-1/2 md:w-2/5">
           <div className="relative h-full w-full">
-            <Image
+            <img
               src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
               alt="Indoor farming"
-              fill
-              className="object-cover rounded-r-2xl"
+              className="object-cover rounded-r-2xl absolute inset-0 h-full w-full"
             />
             <div className="absolute inset-0 bg-gradient-to-l from-transparent to-green-100/90"></div>
           </div>
@@ -212,11 +244,10 @@ export default function FarmsPage() {
             <Link href={`/farms/${farm.id}`} className="block h-full">
               <Card className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 border border-gray-100 rounded-xl">
                 <div className="relative h-60 w-full overflow-hidden">
-                  <Image
+                  <img
                     src={farm.image}
                     alt={farm.name}
-                    fill
-                    className="object-cover transition-transform duration-500 hover:scale-105"
+                    className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                   <div className="absolute top-4 left-4 flex gap-2">
