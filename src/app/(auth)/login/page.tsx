@@ -10,8 +10,11 @@ import { LoginForm } from "@/components/auth/LoginForm";
 import { FarmingScaleSelection } from "@/components/auth/FarmingScaleSelection";
 import { FeatureHighlights } from "@/components/auth/FeatureHighlights";
 import { BackgroundGrid } from "@/components/ui/BackgroundGrid";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [isClient, setIsClient] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedScale, setSelectedScale] = useState("");
@@ -40,6 +43,8 @@ export default function LoginPage() {
       position: 'bottom-center',
       duration: 3000,
     });
+
+    router.push('/dashboard');
     // Here you would typically make an API call to save the preference
   };
 

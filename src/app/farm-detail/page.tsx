@@ -50,7 +50,7 @@ export default function FarmDetailPage() {
       {/* Plant Image Section - Improved with image carousel */}
       <div className="relative w-full h-72 md:h-96 rounded-2xl overflow-hidden mb-6 shadow-md">
         <Image
-          src="https://images.unsplash.com/photo-1603984362497-0a878f607b92?q=80&w=1200&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1524486361537-8ad15938e1a3?q=80&w=2338&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Akhil's Thootam"
           fill
           className="object-cover"
@@ -264,7 +264,7 @@ export default function FarmDetailPage() {
 
       {/* Action Buttons - Desktop */}
       <div className="hidden md:flex justify-center gap-4 mt-8 mb-16">
-        <button className="bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center">
+        <Link href={'/progress'} className="bg-green-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
             <path d="M12 2v8" />
             <path d="m4.93 10.93 1.41 1.41" />
@@ -276,7 +276,7 @@ export default function FarmDetailPage() {
             <path d="M16 14H8" />
           </svg>
           Track Growth
-        </button>
+        </Link>
         <button className="bg-white text-green-600 border border-green-600 px-6 py-2.5 rounded-lg font-medium hover:bg-green-50 transition-colors flex items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
             <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />

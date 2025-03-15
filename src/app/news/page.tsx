@@ -68,6 +68,20 @@ export default function NewsPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-white to-green-50">
       <div className="max-w-7xl mx-auto w-full px-4 py-12 md:px-8">
+        {/* Back Button */}
+        <div className="mb-6">
+          <Link 
+            href={"/dashboard"} 
+            className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-medium"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M19 12H5"></path>
+              <path d="M12 19l-7-7 7-7"></path>
+            </svg>
+            Back to Home
+          </Link>
+        </div>
+        
         {/* Hero Section */}
         <div className="relative rounded-2xl overflow-hidden mb-12">
           <div className="absolute inset-0 bg-gradient-to-r from-green-900/80 to-green-700/40 z-10" />

@@ -27,7 +27,7 @@ export default function PlantDetailPage() {
           {/* Mobile Layout */}
           {/* Header with back button and favorite */}
           <div className="flex justify-between items-center p-4 sticky top-0 bg-white z-10">
-            <Link href="/" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md">
+            <Link href="/dashboard" className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md">
               <ArrowLeft className="text-gray-700" size={20} />
             </Link>
             <h1 className="text-xl font-semibold">Details</h1>
@@ -119,11 +119,11 @@ export default function PlantDetailPage() {
         <div className="hidden md:grid grid-cols-2 min-h-[600px]">
           {/* Left side - Image */}
           <div className="bg-gray-50 flex items-center justify-center p-8 relative">
-            <button 
+            <Link href="/dashboard" 
               className="absolute top-6 left-6 w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md z-10"
             >
               <ArrowLeft className="text-gray-700" size={20} />
-            </button>
+            </Link>
             <Image 
               src="/images/plant.png" 
               alt="Tomato Plant" 
@@ -190,9 +190,9 @@ export default function PlantDetailPage() {
                   <p className="text-gray-600 text-sm">Price</p>
                   <p className="text-3xl font-bold text-gray-800">$123.99</p>
                 </div>
-                <button className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-3 px-8 rounded-lg font-medium hover:shadow-md active:scale-[0.99] transition-all">
+                <Link  href="/growth-status" className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-3 px-8 rounded-lg font-medium hover:shadow-md active:scale-[0.99] transition-all">
                   Start Farming
-                </button>
+                </Link>
               </div>
             </div>
           </div>

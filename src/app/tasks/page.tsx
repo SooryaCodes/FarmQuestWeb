@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import { Clock, ArrowRight, Check } from "lucide-react";
+import { Clock, ArrowRight, Check, ArrowLeft } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 
 // Define a type for card styles
 type CardStyle = {
@@ -17,6 +18,9 @@ type CardStyle = {
 };
 
 export default function TasksPage() {
+  // Add router
+  const router = useRouter();
+
   // Responsive state
   const [isMobile, setIsMobile] = useState(true);
 
@@ -51,6 +55,16 @@ export default function TasksPage() {
     return styles[index % styles.length];
   };
 
+  // Function to handle task click
+  const handleTaskClick = (taskId: number) => {
+    router.push(`/dashboard/task/${taskId}`);
+  };
+
+  // Function to handle back button click
+  const handleBackClick = () => {
+    router.push('/dashboard');
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Mobile view */}
@@ -58,7 +72,13 @@ export default function TasksPage() {
         <>
           {/* Status bar */}
           <div className="flex justify-between items-center px-6 py-3 border-b border-gray-100">
-            <div className="text-gray-600">
+            <div className="text-gray-600 flex items-center">
+              <div 
+                className="mr-2 cursor-pointer"
+                onClick={handleBackClick}
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </div>
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="4" y1="12" x2="20" y2="12"></line>
                 <line x1="4" y1="6" x2="20" y2="6"></line>
@@ -128,7 +148,10 @@ export default function TasksPage() {
                           <div className="text-right">
                             <span className="font-semibold text-sm">{task.coins} Coins</span>
                           </div>
-                          <div className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center`}>
+                          <div 
+                            className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center cursor-pointer`}
+                            onClick={() => handleTaskClick(task.id)}
+                          >
                             <ArrowRight className="w-5 h-5" />
                           </div>
                         </div>
@@ -159,7 +182,15 @@ export default function TasksPage() {
         /* Desktop view - Professional SaaS UI */
         <div className="container mx-auto py-8 px-4 max-w-7xl">
           <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-bold text-gray-800">Task Dashboard</h1>
+            <div className="flex items-center">
+              <button 
+                onClick={handleBackClick}
+                className="mr-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+              <h1 className="text-3xl font-bold text-gray-800">Task Dashboard</h1>
+            </div>
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-lg">
                 <Image 
@@ -281,7 +312,10 @@ export default function TasksPage() {
                               <div className="text-right">
                                 <span className="font-semibold">{task.coins} Coins</span>
                               </div>
-                              <div className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center group-hover:bg-opacity-90 transition-all cursor-pointer`}>
+                              <div 
+                                className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center group-hover:bg-opacity-90 transition-all cursor-pointer`}
+                                onClick={() => handleTaskClick(task.id)}
+                              >
                                 <ArrowRight className="w-5 h-5" />
                               </div>
                             </div>
@@ -334,7 +368,10 @@ export default function TasksPage() {
                               <div className="text-right">
                                 <span className="font-semibold">{task.coins} Coins</span>
                               </div>
-                              <div className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center group-hover:bg-opacity-90 transition-all cursor-pointer`}>
+                              <div 
+                                className={`w-10 h-10 rounded-full ${style.buttonBg} flex items-center justify-center group-hover:bg-opacity-90 transition-all cursor-pointer`}
+                                onClick={() => handleTaskClick(task.id)}
+                              >
                                 <ArrowRight className="w-5 h-5" />
                               </div>
                             </div>
