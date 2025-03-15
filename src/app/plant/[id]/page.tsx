@@ -46,6 +46,18 @@ export default function PlantDetailPage() {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   console.log(quantity);
+  
+  const decreaseQuantity = () => {
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  };
+  
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  console.log(decreaseQuantity,increaseQuantity );
+  
+
   useEffect(() => {
     const fetchPlantData = async () => {
       setLoading(true);
@@ -87,9 +99,6 @@ export default function PlantDetailPage() {
       fetchPlantData();
     }
   }, [params.id]);
-
-  
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   if (loading) {
     return (
