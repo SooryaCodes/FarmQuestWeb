@@ -102,9 +102,9 @@ export default function PlantDetailPage() {
                   <p className="text-gray-600 text-xs sm:text-sm">Price</p>
                   <p className="text-xl sm:text-2xl font-bold">$123.99</p>
                 </div>
-                <button className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-2 sm:py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base font-medium hover:shadow-md active:scale-[0.99] transition-all">
+                <Link href="/growth-status" className="bg-gradient-to-r from-[#77AD3F] to-[#0F6435] text-white py-2 sm:py-3 px-4 sm:px-6 rounded-full text-sm sm:text-base font-medium hover:shadow-md active:scale-[0.99] transition-all">
                   Start Farming
-                </button>
+                </Link>
               </div>
 
               {/* Bottom Indicator - removed for mobile */}
