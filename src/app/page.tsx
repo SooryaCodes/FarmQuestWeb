@@ -493,7 +493,7 @@ export default function Home() {
               </span>
               <h2 className="text-4xl font-bold text-white mb-4">Our Carbon Credit Ecosystem</h2>
               <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                Together, we're making a measurable difference in the fight against climate change
+                Together, we&apos;re making a measurable difference in the fight against climate change
               </p>
             </motion.div>
             
