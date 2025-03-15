@@ -206,7 +206,7 @@ export default function Home() {
               </span>
               <h2 className="text-4xl font-bold text-gray-900 mb-4">Why Choose FarmQuest?</h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                We've reimagined farming for everyone - whether you're a beginner or a pro.
+                We&apos;ve reimagined farming for everyone - whether you&apos;re a beginner or a pro.
               </p>
             </motion.div>
             
