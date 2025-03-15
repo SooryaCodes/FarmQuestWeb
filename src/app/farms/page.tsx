@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
@@ -72,6 +71,7 @@ export default function FarmsPage() {
       status: "Active",
       area: farmData.area,
     };
+    console.log(newFarm);
     
     // Update farms state (you would need to modify this to use setFarms)
     // setFarms([...farms, newFarm]);
