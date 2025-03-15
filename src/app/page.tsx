@@ -9,7 +9,6 @@ import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import UserPoints from "@/components/UserPoints";
 
 // Import BackgroundGrid with SSR disabled
 const BackgroundGrid = dynamic(
@@ -24,10 +23,7 @@ export default function Home() {
     setIsClient(true);
   }, []);
 
-  const userPoints = {
-    exp: 150,
-    coins: 25,
-  };
+
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#77AD3F]/10 to-white overflow-x-hidden relative">
@@ -775,8 +771,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* User Points Section */}
-      <UserPoints exp={userPoints.exp} coins={userPoints.coins} />
+     
     </main>
   );
 }
