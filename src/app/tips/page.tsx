@@ -6,14 +6,6 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 
 // Define the TipItem interface
-interface TipItem {
-  id: number;
-  title: string;
-  image: string;
-  slug: string;
-  category?: string;
-  content?: string;
-}
 
 // Sample tips data
 const tipsData = [

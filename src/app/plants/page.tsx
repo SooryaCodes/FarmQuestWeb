@@ -99,11 +99,10 @@ type FilterType = "All" | "Indoor" | "Outdoor" | "Popular";
 
 export default function PlantsPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>("All");
-  const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [plants, setPlants] = useState<PlantType[]>(dummyPlants);
   const [loading, setLoading] = useState(true);
-
+  console.log(setSearchQuery)
   // Add useEffect to fetch plants/crops data from API
   useEffect(() => {
     const fetchPlants = async () => {
