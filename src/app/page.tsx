@@ -380,19 +380,19 @@ export default function Home() {
                   quote: "It&apos;s fun, easy, and actually makes me money!",
                   author: "Sarah K.",
                   role: "Urban Farmer",
-                  image: "https://randomuser.me/api/portraits/women/44.jpg"
+                  image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80"
                 },
                 {
                   quote: "I&apos;ve never farmed before, but now I have fresh veggies AND extra cash!",
                   author: "Michael T.",
                   role: "Beginner Farmer",
-                  image: "https://randomuser.me/api/portraits/men/32.jpg"
+                  image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80"
                 },
                 {
                   quote: "FarmQuest turned my hobby into a side hustle. The gamification makes it addictive!",
                   author: "Jessica L.",
                   role: "Weekend Farmer",
-                  image: "https://randomuser.me/api/portraits/women/68.jpg"
+                  image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=256&q=80"
                 }
               ].map((testimonial, i) => (
                 <motion.div 
@@ -412,7 +412,7 @@ export default function Home() {
                   </div>
                   <p className="text-gray-700 italic mb-6 text-lg">&quot;{testimonial.quote}&quot;</p>
                   <div className="flex items-center">
-                    <Image src={testimonial.image} alt={testimonial.author} width={48} height={48} className="w-12 h-12 rounded-full mr-4" />
+                    <img src={testimonial.image} alt={testimonial.author} className="w-12 h-12 rounded-full mr-4" />
                     <div>
                       <p className="font-semibold text-gray-800">{testimonial.author}</p>
                       <p className="text-[#0F6435] text-sm">{testimonial.role}</p>
