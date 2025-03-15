@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import AddFarmModal from "@/components/farms/AddFarmModal";
 
 type PlantType = {
   id: number;
@@ -68,6 +69,7 @@ type FilterType = "All" | "Indoor" | "Outdoor" | "Popular";
 export default function PlantShopPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>("Indoor");
   const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
+  const [isAddFarmModalOpen, setIsAddFarmModalOpen] = useState<boolean>(false);
 
   // Add user information
   const userInfo = {
@@ -84,6 +86,18 @@ export default function PlantShopPage() {
     if (activeFilter === "Popular") return plant.isPopular;
     return true;
   });
+
+  const handleAddFarm = (farmData: {
+    name: string;
+    location: string;
+    type: string;
+    description: string;
+    area: string;
+    plants: string[];
+  }) => {
+    console.log("New farm data:", farmData);
+    setIsAddFarmModalOpen(false);
+  };
 
   return (
     <div className="container mx-auto px-4 py-6 md:py-20 min-h-screen bg-white">
@@ -395,7 +409,10 @@ export default function PlantShopPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <Link href="/farms/add" className="block h-full">
+            <div 
+              onClick={() => setIsAddFarmModalOpen(true)} 
+              className="block h-full cursor-pointer"
+            >
               <Card className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 border border-dashed border-gray-300 rounded-xl bg-gray-50/50">
                 <div className="flex flex-col items-center justify-center h-full p-8 text-center">
                   <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
@@ -407,7 +424,7 @@ export default function PlantShopPage() {
                   <p className="text-gray-500 text-sm">Create a new farming setup to track and manage</p>
                 </div>
               </Card>
-            </Link>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -444,7 +461,10 @@ export default function PlantShopPage() {
             <p className="text-sm text-gray-600">Check plant health</p>
           </Link>
           
-          <Link href="/farms/add" className="bg-purple-50 rounded-xl p-6 hover:bg-purple-100 transition-colors border border-purple-100">
+          <div 
+            onClick={() => setIsAddFarmModalOpen(true)}
+            className="bg-purple-50 rounded-xl p-6 hover:bg-purple-100 transition-colors border border-purple-100 cursor-pointer"
+          >
             <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-purple-700">
                 <path d="M12 5v14M5 12h14" />
@@ -452,7 +472,7 @@ export default function PlantShopPage() {
             </div>
             <h3 className="font-semibold mb-1">Add Farm</h3>
             <p className="text-sm text-gray-600">Create new setup</p>
-          </Link>
+          </div>
           
           <Link href="/dashboard" className="bg-amber-50 rounded-xl p-6 hover:bg-amber-100 transition-colors border border-amber-100">
             <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center mb-4">
@@ -466,6 +486,12 @@ export default function PlantShopPage() {
           </Link>
         </div>
       </div>
+      
+      <AddFarmModal 
+        isOpen={isAddFarmModalOpen}
+        onClose={() => setIsAddFarmModalOpen(false)}
+        onSubmit={handleAddFarm}
+      />
     </div>
   );
 }
