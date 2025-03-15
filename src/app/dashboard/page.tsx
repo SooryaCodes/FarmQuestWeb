@@ -502,7 +502,7 @@ function PlantCard({ plant }: { plant: PlantType }) {
       {/* Mobile: Image positioned outside card */}
       <div className="md:hidden absolute scale-150 top-6 left-1/2 transform -translate-x-1/2 z-10">
         <Image
-          src={plant.image || "/images/lettuce.png"}
+          src={plant.image || "/images/plant.png"}
           alt={plant.name}
           width={120}
           height={120}
@@ -511,11 +511,11 @@ function PlantCard({ plant }: { plant: PlantType }) {
       </div>
       
       {/* Card content */}
-      <div className="bg-gray-100 rounded-3xl p-4 pt-16 md:p-6 relative z-0">
+      <div className="bg-gray-100 rounded-3xl p-4 pt-28 md:p-6 relative z-0">
         {/* Desktop: Image positioned inside card at the top */}
-        <div className="hidden md:block mb-4">
+        <div className="hidden md:block mb-4 ml-4">
           <Image
-            src={plant.image || "/images/lettuce.png"}
+            src={plant.image || "/images/plant.png"}
             alt={plant.name}
             width={150}
             height={150}

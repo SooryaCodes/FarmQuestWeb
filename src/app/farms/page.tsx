@@ -241,7 +241,7 @@ export default function FarmsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <Link href={`/farms/${farm.id}`} className="block h-full">
+            <Link href={`/farm-detail`} className="block h-full">
               <Card className="overflow-hidden h-full hover:shadow-lg transition-all duration-300 border border-gray-100 rounded-xl">
                 <div className="relative h-60 w-full overflow-hidden">
                   <img

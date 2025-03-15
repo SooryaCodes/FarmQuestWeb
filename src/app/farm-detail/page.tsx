@@ -8,7 +8,7 @@ export default function FarmDetailPage() {
   const [showFullDescription, setShowFullDescription] = useState(false);
   
   return (
-    <div className="container mx-auto px-4 py-6 min-h-screen ">
+    <div className="container mx-auto px-4 py-6 pb-24 min-h-screen ">
       {/* Header with back button */}
       <div className="flex items-center mb-6">
         <Link href="/farms" className="bg-white rounded-full p-2 shadow-md hover:bg-gray-50 transition-all">
@@ -288,7 +288,7 @@ export default function FarmDetailPage() {
       </div>
 
       {/* Mobile Action Buttons - Fixed at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg md:hidden flex justify-between">
+      <div className=" bottom-0 left-0 right-0 bg-white p-4 shadow-lg md:hidden flex justify-between">
         <button className="bg-white text-green-600 border border-green-600 px-4 py-2 rounded-lg font-medium flex-1 mr-2 flex items-center justify-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
             <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
