@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 export default function FarmDetailPage() {
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -66,7 +65,7 @@ export default function FarmDetailPage() {
 
       {/* Plant Details Card - Simplified */}
       <div className="bg-white rounded-2xl p-6 shadow-sm -mt-16 relative z-10 mx-2 md:mx-auto md:max-w-3xl">
-        <h1 className="text-2xl md:text-3xl font-bold mb-1">Akhil's Thootam</h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-1">Akhil&apos;s Thootam</h1>
         <p className="text-gray-600 mb-4 flex items-center gap-1">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />

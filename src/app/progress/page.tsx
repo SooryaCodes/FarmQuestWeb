@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, MoreHorizontal, X, Bell, Coins, Star, Calendar, CheckCircle, TrendingUp } from 'lucide-react';
+import { ArrowLeft, MoreHorizontal, X, Bell, Coins, Calendar, CheckCircle, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
