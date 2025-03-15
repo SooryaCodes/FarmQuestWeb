@@ -7,6 +7,7 @@ import AccountLink from '@/components/AccountLink';
 import { CheckCircle, Leaf, Sprout, Users, BarChart3, ShieldCheck, Globe, Award, Zap, ArrowRight, ChevronUp, MessageSquare } from 'lucide-react';
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
 
 // Import BackgroundGrid with SSR disabled
 const BackgroundGrid = dynamic(
@@ -15,8 +16,14 @@ const BackgroundGrid = dynamic(
 );
 
 export default function Home() {
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#77AD3F]/10 to-white overflow-x-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-[#77AD3F]/10 to-white overflow-x-hidden relative">
       {/* Mobile View */}
       <div className="md:hidden">
         <div className="relative h-screen flex flex-col">
@@ -146,36 +153,7 @@ export default function Home() {
               className="col-span-6 relative"
             >
               <div className="relative z-10 bg-white p-6 rounded-2xl shadow-xl border border-[#77AD3F]/20 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#77AD3F]/10 to-transparent opacity-50"></div>
-                <div className="relative z-10">
-                  <div className="relative h-[400px] w-full">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative w-[80%] h-[80%] max-w-[500px]">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="h-full w-full rounded-full bg-gradient-to-b from-[#77AD3F] to-[#0F6435] [mask-image:radial-gradient(transparent_65%,white_85%)]" />
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="h-[90%] w-[90%] rounded-full bg-gradient-to-b from-[#77AD3F]/80 to-[#0F6435]/80 animate-pulse [animation-duration:5s] [mask-image:radial-gradient(transparent_60%,white_75%)]" />
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="h-[70%] w-[70%] rounded-full bg-gradient-to-b from-[#77AD3F]/60 to-[#0F6435]/60 animate-pulse [animation-duration:3s] [mask-image:radial-gradient(transparent_55%,white_65%)]" />
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="h-[50%] w-[50%] rounded-full bg-[#0F6435] animate-pulse [animation-duration:2s]" />
-                        </div>
-                        <div className="absolute inset-0">
-                          <div className="h-full w-full rounded-full [background:radial-gradient(circle_at_center,transparent_50%,#77AD3F_75%)] opacity-20 animate-spin [animation-duration:20s]" />
-                        </div>
-                        <div className="absolute inset-0">
-                          <div className="h-full w-full rounded-full [background:radial-gradient(circle_at_center,transparent_65%,#0F6435_85%)] opacity-20 animate-spin [animation-duration:15s] [animation-direction:reverse]" />
-                        </div>
-                        <div className="absolute inset-0">
-                          <div className="h-full w-full rounded-full [background:radial-gradient(ellipse_at_center,transparent_40%,#77AD3F_70%)] opacity-10 animate-spin [animation-duration:25s]" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <img src="/images/globe.png" alt="Globe" className="w-full h-auto" />
               </div>
               
               {/* Improved floating stats cards with better visibility */}
@@ -479,7 +457,7 @@ export default function Home() {
         <div className="py-32 relative overflow-hidden">
           {/* Background Grid */}
           <div className="absolute inset-0">
-            <BackgroundGrid isClient={true} />
+            {isClient && <BackgroundGrid isClient={true} />}
           </div>
           
           <div className="max-w-7xl mx-auto px-8 relative z-10">
