@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CurvedImageGallery } from "@/components/auth/CurvedImageGallery";
 import Image from "next/image";
 import { Toaster, toast } from "sonner";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, Loader2 } from "lucide-react";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { FarmingScaleSelection } from "@/components/auth/FarmingScaleSelection";
 import { FeatureHighlights } from "@/components/auth/FeatureHighlights";
@@ -18,33 +18,69 @@ export default function LoginPage() {
   const [isClient, setIsClient] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedScale, setSelectedScale] = useState("");
-console.log(setIsLoggedIn)
+  const [isLoading, setIsLoading] = useState(false);
+
   // Set isClient to true after component mounts
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   const handleLogin = async (email: string, password: string) => {
-    toast.success('Login Successful!', {
-      description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
-      position: 'bottom-center',
-      duration: 4000,
-    });
-    console.log(email,password)
+    try {
+      setIsLoading(true);
+      
+      // Simulate API call with a delay
+      setTimeout(() => {
+        setIsLoggedIn(true);
+        setIsLoading(false);
+        
+        toast.success('Login Successful!', {
+          description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
+          position: 'bottom-center',
+          duration: 4000,
+        });
+        
+        console.log("User logged in:", email);
+      }, 2000); // 2 second delay to show the spinner
+      
+    } catch (error) {
+      setIsLoading(false);
+      toast.error('Login Failed', {
+        description: 'Please check your credentials and try again.',
+        position: 'bottom-center',
+        duration: 4000,
+      });
+      console.error("Login error:", error);
+    }
   };
 
   const handleScaleSelection = (scale: string) => {
     setSelectedScale(scale);
-    // Send selection to backend
-    console.log("Selected farming scale:", scale);
-    toast.success('Preference Saved!', {
-      description: `Your preferred farming scale "${scale}" has been saved.`,
-      position: 'bottom-center',
-      duration: 3000,
-    });
-
-    router.push('/dashboard');
-    // Here you would typically make an API call to save the preference
+    
+    try {
+      // Here you would typically make an API call to save the user preference
+      // await saveUserPreference(userId, 'farmingScale', scale);
+      
+      console.log("Selected farming scale:", scale);
+      
+      toast.success('Preference Saved!', {
+        description: `Your preferred farming scale "${scale}" has been saved.`,
+        position: 'bottom-center',
+        duration: 3000,
+      });
+      
+      // Short delay before redirecting to dashboard for better UX
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 1000);
+    } catch (error) {
+      toast.error('Failed to save preference', {
+        description: 'Please try again or contact support.',
+        position: 'bottom-center',
+        duration: 4000,
+      });
+      console.error("Error saving preference:", error);
+    }
   };
 
   return (
@@ -117,7 +153,7 @@ console.log(setIsLoggedIn)
                   </h1>
                 </div>
 
-                <LoginForm onLoginSuccess={handleLogin} />
+                <LoginForm onLoginSuccess={handleLogin} isLoading={isLoading} />
 
                 <div className="mt-8 text-center">
                   <p className="text-gray-500 text-sm">

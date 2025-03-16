@@ -9,9 +9,10 @@ import {  Check, X } from "lucide-react";
 
 interface LoginFormProps {
   onLoginSuccess: (email: string, password: string) => void;
+  isLoading: boolean;
 }
 
-export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
+export const LoginForm = ({ onLoginSuccess, isLoading }: LoginFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
