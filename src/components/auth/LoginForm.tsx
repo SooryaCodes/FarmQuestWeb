@@ -13,6 +13,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ onLoginSuccess, isLoading }: LoginFormProps) => {
+  console.log(isLoading)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);

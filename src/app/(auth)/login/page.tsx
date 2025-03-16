@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CurvedImageGallery } from "@/components/auth/CurvedImageGallery";
 import Image from "next/image";
 import { Toaster, toast } from "sonner";
-import { CheckCircle, Loader2 } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { LoginForm } from "@/components/auth/LoginForm";
 import { FarmingScaleSelection } from "@/components/auth/FarmingScaleSelection";
 import { FeatureHighlights } from "@/components/auth/FeatureHighlights";
@@ -40,7 +40,7 @@ export default function LoginPage() {
           duration: 4000,
         });
         
-        console.log("User logged in:", email);
+        console.log("User logged in:", email,password);
       }, 2000); // 2 second delay to show the spinner
       
     } catch (error) {
