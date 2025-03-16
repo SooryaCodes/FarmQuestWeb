@@ -11,7 +11,6 @@ import { FarmingScaleSelection } from "@/components/auth/FarmingScaleSelection";
 import { FeatureHighlights } from "@/components/auth/FeatureHighlights";
 import { BackgroundGrid } from "@/components/ui/BackgroundGrid";
 import { useRouter } from "next/navigation";
-import axios from "@/lib/axios";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -19,8 +18,7 @@ export default function LoginPage() {
   const [isClient, setIsClient] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedScale, setSelectedScale] = useState("");
-  const [user, setUser] = useState(null);
-
+console.log(setIsLoggedIn)
   // Set isClient to true after component mounts
   useEffect(() => {
     setIsClient(true);
