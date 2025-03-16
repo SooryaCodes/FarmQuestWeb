@@ -27,24 +27,12 @@ export default function LoginPage() {
   }, []);
 
   const handleLogin = async (email: string, password: string) => {
-    try {
-      const response = await axios.post('/auth/login', { email, password });
-      setUser(response.data);
-      console.log(response.data);
-      console.log(user);
-      setIsLoggedIn(true);
-      toast.success('Login Successful!', {
-        description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
-        position: 'bottom-center',
-        duration: 4000,
-      });
-    } catch (error) {
-      console.log(error)
-      toast.error('Login Failed. Please check your credentials.', {
-        position: 'bottom-center',
-        duration: 4000,
-      });
-    }
+    toast.success('Login Successful!', {
+      description: 'Welcome back to FarmQuest. Please select your preferred scale of farming.',
+      position: 'bottom-center',
+      duration: 4000,
+    });
+    console.log(email,password)
   };
 
   const handleScaleSelection = (scale: string) => {
